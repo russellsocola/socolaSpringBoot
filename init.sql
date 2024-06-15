@@ -1,0 +1,3 @@
+CREATE SCHEMA IF NOT EXISTS general;
+create SCHEMA IF NOT EXISTS administracion;
+CREATE SCHEMA IF NOT EXISTS ruloso;
