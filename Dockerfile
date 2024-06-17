@@ -1,6 +1,6 @@
-FROM eclipse-temurin:17
+FROM openjdk:17
 
-MAINTAINER Rsocola.com
+LABEL author=Rsocola.com
 
 COPY target/socolaSpringBoot-0.0.1-SNAPSHOT.jar app.jar
 
