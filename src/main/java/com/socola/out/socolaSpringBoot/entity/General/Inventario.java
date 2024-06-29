@@ -1,9 +1,12 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "INVENTARIOS", schema = "GENERAL")
@@ -25,6 +28,10 @@ public class Inventario implements Serializable {
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @ManyToMany(mappedBy = "inventarios", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(allowSetters = true, value = {"hibernateLazyInitializer", "handler"})
+    private List <Pedido> pedidos = new ArrayList <>();
 
     @PrePersist
     public void prePersist() {
@@ -68,5 +75,11 @@ public class Inventario implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public List <Pedido> getPedidos() {
+        return pedidos;
+    }
 
+    public void setPedidos(List <Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

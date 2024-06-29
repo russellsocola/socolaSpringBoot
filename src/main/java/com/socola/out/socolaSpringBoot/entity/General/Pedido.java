@@ -40,9 +40,12 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "fk_id_factura")
     private Factura factura;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
-    @JoinColumn(name = "inventarios")
+    @JoinTable(
+            name = "pedido_inventario",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "inventario_id"))
     private List<Inventario> inventarios;
 
     @PrePersist
