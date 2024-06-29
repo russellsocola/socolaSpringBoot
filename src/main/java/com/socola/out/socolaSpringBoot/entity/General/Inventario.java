@@ -33,6 +33,11 @@ public class Inventario implements Serializable {
     @JsonIgnoreProperties(allowSetters = true, value = {"hibernateLazyInitializer", "handler"})
     private List <Pedido> pedidos = new ArrayList <>();
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler","inventario"})
+    @JoinColumn(name = "fk_id_almacen")
+    private Almacen almacen;
+
     @PrePersist
     public void prePersist() {
         this.fechaCreacion = new Date();
@@ -81,5 +86,13 @@ public class Inventario implements Serializable {
 
     public void setPedidos(List <Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public Almacen getAlmacen() {
+        return almacen;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
     }
 }

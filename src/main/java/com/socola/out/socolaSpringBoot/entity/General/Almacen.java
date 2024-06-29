@@ -37,7 +37,7 @@ public class Almacen implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
     @JoinColumn(name = "fk_id_inventario")
-    private List <Inventario> inventario;
+    private List<Inventario> inventario;
 
     @PrePersist
     public void prePersist(){
