@@ -1,10 +1,13 @@
 package com.socola.out.socolaSpringBoot.entity.Administracion;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.General.Factura;
 import com.socola.out.socolaSpringBoot.entity.General.Sede;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ADMINISTRADORES", schema = "ADMINISTRACION")
@@ -21,14 +24,21 @@ public class Administrador implements Serializable {
     @Column(name = "nombre_administrador",length = 255)
     private String nombreAdministrador;
 
-//    @Column(name = "sede")
-//    private Sede sede;
-
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_sede")
+    private List<Sede> sede;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_facturas")
+    private List<Factura> facturas;
 
     @PrePersist
     public void prePersist(){
@@ -70,5 +80,21 @@ public class Administrador implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public List <Sede> getSede() {
+        return sede;
+    }
+
+    public void setSede(List <Sede> sede) {
+        this.sede = sede;
+    }
+
+    public List <Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List <Factura> facturas) {
+        this.facturas = facturas;
     }
 }

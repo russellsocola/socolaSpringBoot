@@ -1,11 +1,11 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
-import com.socola.out.socolaSpringBoot.entity.Administracion.Cliente;
-import com.socola.out.socolaSpringBoot.entity.Administracion.Empleado;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "FACTURAS", schema = "GENERAL")
@@ -19,26 +19,23 @@ public class Factura implements Serializable {
     @Column(name = "id_factura")
     private Long idFactura;
 
-//    @Column(name = "pedido")
-//    private Pedido pedido;
 
     @Column(name = "fecha_pedido")
     private Date fechaPedido;
 
-    //@Column(name = "cliente")
-    //private Cliente cliente;
-
     @Column(name = "precio_total")
     private Double precioTotal;
-
-    //private Empleado empleado;
-
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_pago")
+    private List<Pago> pago;
 
     @PrePersist
     public void prePersist(){
@@ -88,5 +85,13 @@ public class Factura implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public List <Pago> getPago() {
+        return pago;
+    }
+
+    public void setPago(List <Pago> pago) {
+        this.pago = pago;
     }
 }

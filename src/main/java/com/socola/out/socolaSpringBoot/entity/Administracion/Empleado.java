@@ -1,10 +1,14 @@
 package com.socola.out.socolaSpringBoot.entity.Administracion;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.General.Pedido;
+import com.socola.out.socolaSpringBoot.entity.General.PedidoDetalle;
 import com.socola.out.socolaSpringBoot.entity.General.Sede;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "EMPLEADOS", schema = "ADMINISTRACION")
@@ -24,15 +28,17 @@ public class Empleado implements Serializable {
     @Column(name = "puesto_empleado",length = 255, nullable = false)
     private String puestoEmpleado;
 
-//    @Column(name = "sede")
-//    private Sede sede;
-
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_pedidos")
+    private List<Pedido> pedidos;
 
     @PrePersist
     public void prePersist(){
@@ -82,5 +88,13 @@ public class Empleado implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public List <Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List <Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

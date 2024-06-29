@@ -13,16 +13,9 @@ public class Inventario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_inventario_seq")
-    @SequenceGenerator(name = "id_inventario_seq",sequenceName = "seq_id_inventario",allocationSize = 1,initialValue = 1,schema = "GENERAL")
+    @SequenceGenerator(name = "id_inventario_seq", sequenceName = "seq_id_inventario", allocationSize = 1, initialValue = 1, schema = "GENERAL")
     @Column(name = "id_inventario")
     private Long idInventario;
-
-    //private Producto producto;
-
-    //private Almacen almacen;
-
-//    @Column(name = "ficha_tecnica")
-//    private FichaTecnica fichaTecnica;
 
     @Column(name = "cantidad")
     private Integer cantidad;
@@ -34,12 +27,12 @@ public class Inventario implements Serializable {
     private Date fechaModificacion;
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         this.fechaCreacion = new Date();
     }
 
     @PreUpdate
-    private void preUpdate(){
+    private void preUpdate() {
         this.fechaModificacion = new Date();
     }
 
@@ -74,4 +67,6 @@ public class Inventario implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+
+
 }

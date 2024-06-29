@@ -17,11 +17,6 @@ public class PedidoDetalle implements Serializable {
     @Column(name = "id_pedido_detalle")
     private Long idPedidoDetalle;
 
-    //private Pedido pedido;
-    //private Producto producto;
-    //private PedidoDetalle pedidoDetalle;
-    //private FichaTecnica fichaTecnica;
-
     @Column(name = "cantidad")
     private Integer cantidad;
 
@@ -73,4 +68,5 @@ public class PedidoDetalle implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+
 }

@@ -1,6 +1,6 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
-import com.socola.out.socolaSpringBoot.entity.Administracion.Cliente;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,9 +22,6 @@ public class Pedido implements Serializable {
     @Column(name = "fecha_pedido")
     private Date fechaPedido;
 
-    //private Cliente cliente;
-    //private List<Producto> productos;
-
     @Column(name = "cantidad_pedidos")
     private Integer cantidad;
 
@@ -33,6 +30,20 @@ public class Pedido implements Serializable {
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_pedido_detalles")
+    private List<PedidoDetalle> pedidoDetalles;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_id_factura")
+    private Factura factura;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "inventarios")
+    private List<Inventario> inventarios;
 
     @PrePersist
     public void prePersist(){
@@ -82,5 +93,29 @@ public class Pedido implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public List <PedidoDetalle> getPedidoDetalles() {
+        return pedidoDetalles;
+    }
+
+    public void setPedidoDetalles(List <PedidoDetalle> pedidoDetalles) {
+        this.pedidoDetalles = pedidoDetalles;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+
+    public List <Inventario> getInventarios() {
+        return inventarios;
+    }
+
+    public void setInventarios(List <Inventario> inventarios) {
+        this.inventarios = inventarios;
     }
 }

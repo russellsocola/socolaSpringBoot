@@ -1,7 +1,5 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
-import com.socola.out.socolaSpringBoot.entity.Administracion.Cliente;
-import com.socola.out.socolaSpringBoot.entity.Administracion.Empleado;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,11 +16,6 @@ public class Pago implements Serializable {
     @SequenceGenerator(name = "id_pago_seq",sequenceName = "seq_id_pago",allocationSize = 1,initialValue = 1,schema = "GENERAL")
     @Column(name = "id_pago")
     private Long idPago;
-
-    //private Factura factura;
-    //private Cliente cliente;
-//    private Empleado empleado;
-//    private Sede sede;
 
     @Column(name = "valor_pagado")
     private Double valorPagado;
@@ -96,4 +89,6 @@ public class Pago implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+
+
 }

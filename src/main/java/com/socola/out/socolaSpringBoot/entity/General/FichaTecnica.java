@@ -1,9 +1,11 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "FICHAS_TECNICAS", schema = "GENERAL")
@@ -16,8 +18,6 @@ public class FichaTecnica implements Serializable {
     @SequenceGenerator(name = "id_ficha_tecnica_seq",sequenceName = "seq_id_ficha_tecnica",allocationSize = 1,initialValue = 1,schema = "GENERAL")
     @Column(name = "id_ficha_tecnica")
     private Long idFichaTecnica;
-
-//    private Producto producto;
 
     @Column(name = "nombre_ficha_tecnica")
     private String nombreFichaTecnica;
@@ -36,6 +36,16 @@ public class FichaTecnica implements Serializable {
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_producto")
+    private Producto producto;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_pedidos")
+    private List<Pedido> pedidos;
 
     @PrePersist
     public void prePersist(){
@@ -101,5 +111,21 @@ public class FichaTecnica implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public List <Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List <Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

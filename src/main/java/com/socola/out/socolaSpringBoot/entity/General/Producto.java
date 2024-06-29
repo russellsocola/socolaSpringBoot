@@ -1,10 +1,11 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
-import com.socola.out.socolaSpringBoot.entity.Administracion.Proveedor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCTOS", schema = "GENERAL")
@@ -27,14 +28,21 @@ public class Producto implements Serializable {
     @Column(name = "precio_producto")
     private Double precioProducto;
 
-//    @Column(name = "proveedor")
-//    private Proveedor proveedor;
-
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
     @Column(name = "fecha_modificacion")
     private Date fechaModificacion;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_ficha-tecnica")
+    private FichaTecnica fichaTecnica;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JoinColumn(name = "fk_id_inventario")
+    private List<Inventario> inventario;
 
     @PrePersist
     public void prePersist() {
@@ -93,5 +101,21 @@ public class Producto implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public FichaTecnica getFichaTecnica() {
+        return fichaTecnica;
+    }
+
+    public void setFichaTecnica(FichaTecnica fichaTecnica) {
+        this.fichaTecnica = fichaTecnica;
+    }
+
+    public List <Inventario> getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(List <Inventario> inventario) {
+        this.inventario = inventario;
     }
 }
