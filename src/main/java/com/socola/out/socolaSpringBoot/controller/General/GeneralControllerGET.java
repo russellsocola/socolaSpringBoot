@@ -30,7 +30,7 @@ public class GeneralControllerGET {
     }
 
     //Facturas
-    @GetMapping("LsitFacturas")
+    @GetMapping("ListFacturas")
     public ResponseEntity<List<Factura>> getListFacturas(){
         return ResponseEntity.ok(iGeneralService.listarFacturas());
     }
@@ -57,7 +57,7 @@ public class GeneralControllerGET {
         return ResponseEntity.ok(iGeneralService.listarInventarios());
     }
 
-    @GetMapping("findInvventario/{idInventario}")
+    @GetMapping("FindInventario/{idInventario}")
     public ResponseEntity<Inventario> findInvventario(@PathVariable Long idInventario){
         return ResponseEntity.ok(iGeneralService.findByInventario(idInventario));
     }

@@ -26,7 +26,7 @@ public class Empleado implements Serializable {
     private String nombreEmpleado;
 
     @Column(name = "puesto_empleado",length = 255, nullable = false)
-    private String puestoEmpleado;
+        private String puestoEmpleado;
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;

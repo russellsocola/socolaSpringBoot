@@ -28,14 +28,14 @@ public interface IGeneralService {
     Sede findBySede(Long sede);
 
 
-    String saveAlmacen(Almacen almacen);
-    String saveFactura(Factura factura);
-    String saveFichaTecnica(FichaTecnica fichaTecnica);
-    String saveInventario(Inventario inventario);
-    String savePago(Pago pago);
-    String savePedido(Pedido pedido);
-    String savePedidoDetalle(PedidoDetalle pedidoDetalle);
-    String saveProducto(Producto producto);
-    String saveSede(Sede sede);
+    Almacen saveAlmacen(Almacen almacen);
+    Factura saveFactura(Factura factura);
+    FichaTecnica saveFichaTecnica(FichaTecnica fichaTecnica);
+    Inventario saveInventario(Inventario inventario);
+    Pago savePago(Pago pago);
+    Pedido savePedido(Pedido pedido);
+    PedidoDetalle savePedidoDetalle(PedidoDetalle pedidoDetalle);
+    Producto saveProducto(Producto producto);
+    Sede saveSede(Sede sede);
 
 }

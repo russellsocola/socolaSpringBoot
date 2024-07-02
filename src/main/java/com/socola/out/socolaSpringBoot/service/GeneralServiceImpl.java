@@ -136,47 +136,47 @@ public class GeneralServiceImpl implements IGeneralService {
      */
 
     @Override
-    public String saveAlmacen(Almacen almacen) {
-        return "";
+    public Almacen saveAlmacen(Almacen almacen) {
+        return iAlmacenDao.save(almacen);
     }
 
     @Override
-    public String saveFactura(Factura factura) {
-        return "";
+    public Factura saveFactura(Factura factura) {
+        return iFacturaDao.save(factura);
     }
 
     @Override
-    public String saveFichaTecnica(FichaTecnica fichaTecnica) {
-        return "";
+    public FichaTecnica saveFichaTecnica(FichaTecnica fichaTecnica) {
+        return iFichaTecnicaDao.save(fichaTecnica);
     }
 
     @Override
-    public String saveInventario(Inventario inventario) {
-        return "";
+    public Inventario saveInventario(Inventario inventario) {
+        return iInventarioDao.save(inventario);
     }
 
     @Override
-    public String savePago(Pago pago) {
-        return "";
+    public Pago savePago(Pago pago) {
+        return iPagoDao.save(pago);
     }
 
     @Override
-    public String savePedido(Pedido pedido) {
-        return "";
+    public Pedido savePedido(Pedido pedido) {
+        return iPedidoDao.save(pedido);
     }
 
     @Override
-    public String savePedidoDetalle(PedidoDetalle pedidoDetalle) {
-        return "";
+    public PedidoDetalle savePedidoDetalle(PedidoDetalle pedidoDetalle) {
+        return iPedidoDetalleDao.save(pedidoDetalle);
     }
 
     @Override
-    public String saveProducto(Producto producto) {
-        return "";
+    public Producto saveProducto(Producto producto) {
+        return iProductoDao.save(producto);
     }
 
     @Override
-    public String saveSede(Sede sede) {
-        return "";
+    public Sede saveSede(Sede sede) {
+        return iSedeDao.save(sede);
     }
 }

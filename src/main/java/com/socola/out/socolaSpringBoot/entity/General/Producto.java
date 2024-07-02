@@ -35,7 +35,7 @@ public class Producto implements Serializable {
     private Date fechaModificacion;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler","producto"})
     @JoinColumn(name = "fk_id_ficha-tecnica")
     private FichaTecnica fichaTecnica;
 

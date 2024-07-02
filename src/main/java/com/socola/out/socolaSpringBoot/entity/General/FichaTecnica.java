@@ -29,7 +29,7 @@ public class FichaTecnica implements Serializable {
     private String especificacionesFichaTecnica;
 
     @Column(name = "precausiones")
-    private String Precausiones;
+    private String precausiones;
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
@@ -38,7 +38,7 @@ public class FichaTecnica implements Serializable {
     private Date fechaModificacion;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler","fichaTecnica"})
     @JoinColumn(name = "fk_id_producto")
     private Producto producto;
 
@@ -90,11 +90,11 @@ public class FichaTecnica implements Serializable {
     }
 
     public String getPrecausiones() {
-        return Precausiones;
+        return precausiones;
     }
 
     public void setPrecausiones(String precausiones) {
-        Precausiones = precausiones;
+        this.precausiones = precausiones;
     }
 
     public Date getFechaCreacion() {
