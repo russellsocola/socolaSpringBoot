@@ -1,6 +1,7 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "INVENTARIOS", schema = "GENERAL")
-public class Inventario implements Serializable {
+public class Inventario extends BaseEntity {
 
     private static final long serialVersionUID = 4508133749092504292L;
 
@@ -23,12 +24,6 @@ public class Inventario implements Serializable {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
     @ManyToMany(mappedBy = "inventarios", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(allowSetters = true, value = {"hibernateLazyInitializer", "handler"})
     private List <Pedido> pedidos = new ArrayList <>();
@@ -37,16 +32,6 @@ public class Inventario implements Serializable {
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler","inventario"})
     @JoinColumn(name = "fk_id_almacen")
     private Almacen almacen;
-
-    @PrePersist
-    public void prePersist() {
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate() {
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdInventario() {
         return idInventario;
@@ -62,22 +47,6 @@ public class Inventario implements Serializable {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public List <Pedido> getPedidos() {

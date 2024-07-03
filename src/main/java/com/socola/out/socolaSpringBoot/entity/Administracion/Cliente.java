@@ -1,6 +1,7 @@
 package com.socola.out.socolaSpringBoot.entity.Administracion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import com.socola.out.socolaSpringBoot.entity.General.Pedido;
 import jakarta.persistence.*;
 
@@ -8,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Russell
+ */
 @Entity
 @Table(name = "CLIENTES", schema = "ADMINISTRACION")
-public class Cliente implements Serializable {
+public class Cliente extends BaseEntity {
 
     private static final long serialVersionUID = 4174170275798710255L;
 
@@ -32,25 +36,10 @@ public class Cliente implements Serializable {
     @Column(name = "email_cliente", length = 55, nullable = false)
     private String emailCliente;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnoreProperties(allowSetters = true, value = {"hibernateLazyInitializer","handler"})
     @JoinColumn(name = "fk_id_pedidos")
     private List<Pedido> pedidos;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdCliente() {
         return idCliente;
@@ -90,22 +79,6 @@ public class Cliente implements Serializable {
 
     public void setEmailCliente(String emailCliente) {
         this.emailCliente = emailCliente;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public List <Pedido> getPedidos() {

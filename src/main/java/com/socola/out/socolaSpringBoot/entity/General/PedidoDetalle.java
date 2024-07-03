@@ -20,23 +20,6 @@ public class PedidoDetalle implements Serializable {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
-
-
     public Long getIdPedidoDetalle() {
         return idPedidoDetalle;
     }
@@ -52,21 +35,4 @@ public class PedidoDetalle implements Serializable {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
-    }
-
 }

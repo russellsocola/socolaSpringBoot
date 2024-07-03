@@ -1,14 +1,18 @@
 package com.socola.out.socolaSpringBoot.entity.Administracion;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Russell
+ */
 @Entity
 @Table(name = "USUARIOS", schema = "ADMINISTRACION")
-public class Usuario implements Serializable {
+public class Usuario extends BaseEntity {
 
     private static final long  serialVersionUID = 4644783394053548965L;
 
@@ -28,26 +32,8 @@ public class Usuario implements Serializable {
     @Column(name = "contrasenia",length = 300,nullable = false)
     private String contrasenia;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
-
     @Column(name = "usuario_tipo")
     private String usuarioTipo;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -79,22 +65,6 @@ public class Usuario implements Serializable {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public String getUsuarioTipo() {

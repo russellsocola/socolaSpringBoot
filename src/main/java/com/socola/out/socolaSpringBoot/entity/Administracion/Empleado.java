@@ -1,6 +1,7 @@
 package com.socola.out.socolaSpringBoot.entity.Administracion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import com.socola.out.socolaSpringBoot.entity.General.Pedido;
 import com.socola.out.socolaSpringBoot.entity.General.PedidoDetalle;
 import com.socola.out.socolaSpringBoot.entity.General.Sede;
@@ -10,9 +11,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Russell
+ */
 @Entity
 @Table(name = "EMPLEADOS", schema = "ADMINISTRACION")
-public class Empleado implements Serializable {
+public class Empleado extends BaseEntity {
 
     private static final long serialVersionUID = -6411716431384356349L;
 
@@ -28,27 +32,10 @@ public class Empleado implements Serializable {
     @Column(name = "puesto_empleado",length = 255, nullable = false)
         private String puestoEmpleado;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
     @JoinColumn(name = "fk_id_pedidos")
     private List<Pedido> pedidos;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdEmpleado() {
         return idEmpleado;
@@ -72,22 +59,6 @@ public class Empleado implements Serializable {
 
     public void setPuestoEmpleado(String puestoEmpleado) {
         this.puestoEmpleado = puestoEmpleado;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public List <Pedido> getPedidos() {

@@ -1,6 +1,7 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "FICHAS_TECNICAS", schema = "GENERAL")
-public class FichaTecnica implements Serializable {
+public class FichaTecnica extends BaseEntity {
 
     private static final long serialVersionUID = -1282562396661193479L;
 
@@ -31,12 +32,6 @@ public class FichaTecnica implements Serializable {
     @Column(name = "precausiones")
     private String precausiones;
 
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler","fichaTecnica"})
     @JoinColumn(name = "fk_id_producto")
@@ -46,16 +41,6 @@ public class FichaTecnica implements Serializable {
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
     @JoinColumn(name = "fk_id_pedidos")
     private List<Pedido> pedidos;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdFichaTecnica() {
         return idFichaTecnica;
@@ -95,22 +80,6 @@ public class FichaTecnica implements Serializable {
 
     public void setPrecausiones(String precausiones) {
         this.precausiones = precausiones;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public Producto getProducto() {

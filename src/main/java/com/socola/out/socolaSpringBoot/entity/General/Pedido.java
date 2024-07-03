@@ -1,15 +1,20 @@
 package com.socola.out.socolaSpringBoot.entity.General;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.socola.out.socolaSpringBoot.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Russell
+ */
 @Entity
 @Table(name = "PEDIDOS", schema = "GENERAL")
-public class Pedido implements Serializable {
+public class Pedido extends BaseEntity {
 
     private static final long serialVersionUID = -5301068039197310878L;
 
@@ -19,17 +24,13 @@ public class Pedido implements Serializable {
     @Column(name = "id_pedido")
     private Long idPedido;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "America/Lima")
     @Column(name = "fecha_pedido")
     private Date fechaPedido;
 
     @Column(name = "cantidad_pedidos")
     private Integer cantidad;
-
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
@@ -47,16 +48,6 @@ public class Pedido implements Serializable {
             joinColumns = @JoinColumn(name = "pedido_id"),
             inverseJoinColumns = @JoinColumn(name = "inventario_id"))
     private List<Inventario> inventarios;
-
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    }
-
-    @PreUpdate
-    private void preUpdate(){
-        this.fechaModificacion = new Date();
-    }
 
     public Long getIdPedido() {
         return idPedido;
@@ -80,22 +71,6 @@ public class Pedido implements Serializable {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public List <PedidoDetalle> getPedidoDetalles() {
