@@ -38,6 +38,7 @@ public class Pedido extends BaseEntity {
     private List<PedidoDetalle> pedidoDetalles;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(allowSetters = true,value = {"hibernateLazyInitializer","handler"})
     @JoinColumn(name = "fk_id_factura")
     private Factura factura;
 
