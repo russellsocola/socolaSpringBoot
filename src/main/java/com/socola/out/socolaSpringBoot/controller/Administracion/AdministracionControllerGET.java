@@ -77,4 +77,37 @@ public class AdministracionControllerGET {
     public ResponseEntity<Usuario> FindUsuarios(@PathVariable Long idUsuario) {
         return ResponseEntity.ok(iAdministracionService.findByUsuario(idUsuario));
     }
+
+    //Calculos
+
+    @GetMapping("getTotalSedesByAdministradorId/{id}")
+    public int getTotalSedesByAdministradorId(@PathVariable Long id){
+        return iAdministracionService.getTotalSedesByAdministradorId(id);
+    }
+
+    @GetMapping("getTotalPedidosByClienteId/{id}")
+    public int getTotalPedidosByClienteId(@PathVariable Long id){
+        return iAdministracionService.getTotalPedidosByClienteId(id);
+    }
+
+    @GetMapping("getTotalPedidosByEmpleadoId/{id}")
+    public int getTotalPedidosByEmpleadoId(@PathVariable Long id){
+        return iAdministracionService.getTotalPedidosByEmpleadoId(id);
+    }
+
+    @GetMapping("getTotalPedidos")
+    public long getTotalPedidos(){
+        return iAdministracionService.getTotalPedidos();
+    }
+
+    @GetMapping("getTotalPedidosGestionados")
+    public long getTotalPedidosGestionados(){
+        return iAdministracionService.getTotalPedidosGestionados();
+    }
+
+    @GetMapping("getTotalSedesGestionadas")
+    public long getTotalSedesGestionadas(){
+        return iAdministracionService.getTotalSedesGestionadas();
+    }
+
 }

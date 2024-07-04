@@ -179,4 +179,12 @@ public class GeneralServiceImpl implements IGeneralService {
     public Sede saveSede(Sede sede) {
         return iSedeDao.save(sede);
     }
+
+    //Calculos y Filtrados
+
+    // Obtener el número total de sedes
+    @Override
+    public long getTotalSedes() {
+        return iSedeDao.count();
+    }
 }

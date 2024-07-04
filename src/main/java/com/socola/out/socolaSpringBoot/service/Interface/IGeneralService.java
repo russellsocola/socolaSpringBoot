@@ -38,4 +38,7 @@ public interface IGeneralService {
     Producto saveProducto(Producto producto);
     Sede saveSede(Sede sede);
 
+
+    long getTotalSedes();
+
 }

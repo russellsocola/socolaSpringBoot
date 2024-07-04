@@ -25,4 +25,12 @@ public interface IAdministracionService {
     Empleado saveEmpleado(Empleado empleado);
     Proveedor saveProveedor(Proveedor proveedor);
     Usuario savaUsuario(Usuario usuario);
+
+
+    int getTotalSedesByAdministradorId(Long id);
+    int getTotalPedidosByClienteId(Long id);
+    int getTotalPedidosByEmpleadoId(Long id);
+    long getTotalPedidos();
+    long getTotalPedidosGestionados();
+    long getTotalSedesGestionadas();
 }

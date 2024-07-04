@@ -14,7 +14,6 @@ public class AdministracionServiceImpl implements IAdministracionService {
     //Repositories JPA
     @Autowired
     private IAdministradorDao iAdministradorDao;
-
     @Autowired
     private IClienteDao iClienteDao;
     @Autowired
@@ -113,4 +112,60 @@ public class AdministracionServiceImpl implements IAdministracionService {
         return iUsuarioDao.save(usuario);
     }
 
+    //Calculos y Filtrados
+
+
+    //Hace un conteo simple de cuantos sedes tiene a su cargo un Administrador
+    @Override
+    public int getTotalSedesByAdministradorId(Long id) {
+        Administrador administrador = iAdministradorDao.findById(id).orElse(null);
+        if (administrador != null) {
+            return administrador.getSede().size();
+        }
+       return 0;
+    }
+
+    // Calcular el total de pedidos por cliente
+    @Override
+    public int getTotalPedidosByClienteId(Long id) {
+        Cliente cliente = iClienteDao.findById(id).orElse(null);
+        if (cliente != null) {
+            return cliente.getPedidos().size();
+        }
+        return 0;
+    }
+
+    // Calcular el total de pedidos por empleado
+    @Override
+    public int getTotalPedidosByEmpleadoId(Long id) {
+        Empleado empleado = iEmpleadoDao.findById(id).orElse(null);
+        if (empleado != null) {
+            return empleado.getPedidos().size();
+        }
+       return 0;
+    }
+
+    // Calcular el número total de pedidos realizados por todos los clientes
+    @Override
+    public long getTotalPedidos() {
+        return iClienteDao.findAll().stream()
+                .mapToLong(cliente -> cliente.getPedidos().size())
+                .sum();
+    }
+
+    // Calcular el número total de pedidos gestionados por todos los empleados
+    @Override
+    public long getTotalPedidosGestionados() {
+        return iEmpleadoDao.findAll().stream()
+                .mapToLong(empleado -> empleado.getPedidos().size())
+                .sum();
+    }
+
+    // Calcular el número total de sedes gestionadas por todos los administradores
+    @Override
+    public long getTotalSedesGestionadas() {
+        return iAdministradorDao.findAll().stream()
+                .mapToLong(administrador -> administrador.getSede().size())
+                .sum();
+    }
 }
