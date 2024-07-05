@@ -89,27 +89,57 @@ public class AdministracionServiceImpl implements IAdministracionService {
 
     @Override
     public Administrador saveAdministrador(Administrador admin) {
-        return iAdministradorDao.save(admin);
+        try {
+            return iAdministradorDao.save(admin);
+        } catch (Exception e) {
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Cliente saveCliente(Cliente client) {
-        return iClienteDao.save(client);
+        try {
+            return iClienteDao.save(client);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Empleado saveEmpleado(Empleado empleado) {
-        return iEmpleadoDao.save(empleado);
+        try {
+            return iEmpleadoDao.save(empleado);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Proveedor saveProveedor(Proveedor proveedor) {
-        return iProveedorDao.save(proveedor);
+        try {
+            return iProveedorDao.save(proveedor);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Usuario savaUsuario(Usuario usuario) {
-        return iUsuarioDao.save(usuario);
+        try {
+            return iUsuarioDao.save(usuario);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     //Calculos y Filtrados

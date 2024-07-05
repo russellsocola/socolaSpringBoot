@@ -137,47 +137,101 @@ public class GeneralServiceImpl implements IGeneralService {
 
     @Override
     public Almacen saveAlmacen(Almacen almacen) {
-        return iAlmacenDao.save(almacen);
+        try {
+            return iAlmacenDao.save(almacen);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Factura saveFactura(Factura factura) {
-        return iFacturaDao.save(factura);
+        try {
+            return iFacturaDao.save(factura);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public FichaTecnica saveFichaTecnica(FichaTecnica fichaTecnica) {
-        return iFichaTecnicaDao.save(fichaTecnica);
+        try {
+            return iFichaTecnicaDao.save(fichaTecnica);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Inventario saveInventario(Inventario inventario) {
-        return iInventarioDao.save(inventario);
+        try {
+            return iInventarioDao.save(inventario);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Pago savePago(Pago pago) {
-        return iPagoDao.save(pago);
+        try {
+            return iPagoDao.save(pago);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Pedido savePedido(Pedido pedido) {
-        return iPedidoDao.save(pedido);
+        try {
+            return iPedidoDao.save(pedido);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public PedidoDetalle savePedidoDetalle(PedidoDetalle pedidoDetalle) {
-        return iPedidoDetalleDao.save(pedidoDetalle);
+        try {
+            return iPedidoDetalleDao.save(pedidoDetalle);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Producto saveProducto(Producto producto) {
-        return iProductoDao.save(producto);
+        try {
+            return iProductoDao.save(producto);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     @Override
     public Sede saveSede(Sede sede) {
-        return iSedeDao.save(sede);
+        try {
+            return iSedeDao.save(sede);
+        }catch (Exception e){
+            // Manejo de la excepción
+            e.printStackTrace(); // O usa un logger para registrar el error
+            return null;
+        }
     }
 
     //Calculos y Filtrados
